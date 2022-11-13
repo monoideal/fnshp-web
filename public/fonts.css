@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'Rubik';
+  src: url('fonts/Rubik-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('fonts/Rubik-Light.ttf');
+  font-weight: light;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('fonts/Rubik-Medium.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('fonts/Rubik-Bold.ttf');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('fonts/Rubik-Italic.ttf');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('fonts/Rubik-LightItalic.ttf');
+  font-weight: light;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Rubik';
+  src: url('fonts/Rubik-BoldItalic.ttf');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Permanent Marker';
+  src: url('fonts/PermanentMarker-Regular.ttf');
+}

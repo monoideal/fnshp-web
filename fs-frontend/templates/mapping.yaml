@@ -1,0 +1,8 @@
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: {{ include "fs-frontend.fullname" . }}-mapping
+spec:
+  host: {{ .Values.hostname }}
+  prefix: /
+  service: {{ include "fs-frontend.fullname" . }}

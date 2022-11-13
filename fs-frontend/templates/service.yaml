@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "fs-frontend.fullname" . }}
+  labels:
+    {{- include "fs-frontend.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: fs-fe
+      protocol: TCP
+      name: fs-fe
+  selector:
+    {{- include "fs-frontend.selectorLabels" . | nindent 4 }}

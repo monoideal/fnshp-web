@@ -1,0 +1,97 @@
+# Default values for fs-frontend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: 606563931124.dkr.ecr.us-east-1.amazonaws.com/fanship/fanship-ui
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "qa"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+hostname: "qa.fanship.fan"
+
+env: 
+  SERVER_HOST: https://api.qa.fanship.fan
+  SHOPIFY_DOMAIN: fanshipdev.myshopify.com
+  SHOPIFY_STOREFRONT_ACCESS_TOKEN: d01ea64e2580ffed1085dfac02e858df
+  AUTH0_DOMAIN: fanship-qa.us.auth0.com
+  AUTH0_CLIENT_ID: me7zl2jw7i4o8Zzvz3tlEJqnPWmQtjGS
+  AUTH0_AUDIENCE: https://fanship-qa.us.auth0.com/api/v2/
+  PLAID_PUBLIC_KEY: 391f3bbf57453cd5f775f5a2a294ed
+  AL_FRONTEND_URL: https://al2.dev.attributionledger.com
+  FILESTORE_CLIENT_ID: 84e04c48-aa8b-4575-83bc-8aebe364545e
+  CREATOR_ACCESS_CODE_HASH: 3a2e9c86543e71709b60aa79ac97ebeaf361be5e
+  ADMIN_ACCESS_CODE_HASH: fc73b137cfa03f471a15ea9bea8f6b84190b8e11
+  NODE_ENV: client
+  GOOGLE_ANALYTICS_UA_ID: UA-164939525-2
+  SMARTLOOK_KEY: da5b0b3197382a93485898d0cd706a1885db3d45

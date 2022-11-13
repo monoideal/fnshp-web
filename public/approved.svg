@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="90" height="24" viewBox="0 0 90 24">
+    <g fill="none" fill-rule="evenodd">
+        <rect width="89" height="23" x=".5" y=".5" fill="#FFF" stroke="#4FDBC0" rx="11.5"/>
+        <text fill="#161230" font-family="Rubik-Medium, Rubik" font-size="11" font-weight="400">
+            <tspan x="26" y="17">APPROVED</tspan>
+        </text>
+        <circle cx="12" cy="12" r="10" fill="#4FDBC0"/>
+        <path fill="#FFF" fill-rule="nonzero" d="M15.333 14.667L12.667 12V9.88A2.007 2.007 0 0 0 14 8c0-1.107-.893-2-2-2s-2 .893-2 2c0 .867.56 1.6 1.333 1.88V12l-2.666 2.667H6V18h3.333v-2.033l2.667-2.8 2.667 2.8V18H18v-3.333h-2.667z"/>
+    </g>
+</svg>

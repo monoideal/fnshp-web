@@ -1,0 +1,74 @@
+---
+
+image: 
+  name: 606563931124.dkr.ecr.us-east-1.amazonaws.com/devops/base-pipeline:base
+  aws: 
+    access-key: $AWS_ACCESS_KEY_ID_NEW
+    secret-key: $AWS_SECRET_ACCESS_KEY_NEW
+
+pipelines:
+  branches:
+    dev:
+      - step:
+          name: build and deploy dev
+          script:
+            - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEW
+            - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEW
+            - export REGISTRY="606563931124.dkr.ecr.us-east-1.amazonaws.com/fanship/fanship-ui"
+            - export TAG=${BITBUCKET_BRANCH}-build-${BITBUCKET_BUILD_NUMBER}
+            - docker build -t ${REGISTRY}:${TAG} .
+            - $(aws ecr get-login --no-include-email --region us-east-1)
+            - docker push ${REGISTRY}:${TAG}
+            - aws eks update-kubeconfig --name dev-fanship
+            - helm upgrade --install -f ./fs-frontend/values-dev.yaml --timeout 180s fs-frontend --set image.tag=$TAG ./fs-frontend
+          services:
+            - docker
+    dev-client:
+      - step:
+          name: build and deploy dev client
+          script:
+            - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEW
+            - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEW
+            - export REGISTRY="606563931124.dkr.ecr.us-east-1.amazonaws.com/fanship/fanship-ui"
+            - export TAG=qa-build-${BITBUCKET_BUILD_NUMBER}
+            - docker build -t ${REGISTRY}:${TAG} .
+            - $(aws ecr get-login --no-include-email --region us-east-1)
+            - docker push ${REGISTRY}:${TAG}
+            - aws eks update-kubeconfig --name qa-fanship
+            - helm upgrade --install -f ./fs-frontend/values-qa.yaml --timeout 180s fs-frontend --set image.tag=$TAG ./fs-frontend
+          services:
+            - docker
+    master:
+      - step:
+          name: build and deploy stage
+          script:
+            - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEW
+            - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEW
+            - export REGISTRY="606563931124.dkr.ecr.us-east-1.amazonaws.com/fanship/fanship-ui"
+            - export TAG=uat-build-${BITBUCKET_BUILD_NUMBER}
+            - docker build -t ${REGISTRY}:${TAG} .
+            - $(aws ecr get-login --no-include-email --region us-east-1)
+            - docker push ${REGISTRY}:${TAG}
+            - aws eks update-kubeconfig --name uat-fanship
+            - helm upgrade --install -f ./fs-frontend/values-uat.yaml --timeout 180s fs-frontend --set image.tag=$TAG ./fs-frontend
+      - step:
+          name: promote staging to prod
+          trigger: manual
+          script:
+            - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_NEW_PROD
+            - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_NEW_PROD
+            - export REGISTRY="772920189686.dkr.ecr.us-east-1.amazonaws.com/fanship/fanship-ui"
+            - export TAG=prod-build-${BITBUCKET_BUILD_NUMBER}
+            - docker build -t ${REGISTRY}:${TAG} .
+            - $(aws ecr get-login --no-include-email --region us-east-1)
+            - docker push ${REGISTRY}:${TAG}
+            - aws eks update-kubeconfig --name prod-fanship
+            - helm upgrade --install -f ./fs-frontend/values-prod.yaml --timeout 180s fs-frontend --set image.tag=$TAG ./fs-frontend
+          services:
+            - docker
+options:
+  docker: true
+definitions:
+  services:
+    docker:
+      memory: 3072

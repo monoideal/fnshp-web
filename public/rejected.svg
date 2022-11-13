@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="94" height="24" viewBox="0 0 94 24">
+    <g fill="none" fill-rule="evenodd">
+        <rect width="93" height="23" x=".5" y=".5" stroke="#D0021B" rx="11.5"/>
+        <text fill="#202F35" font-family="OpenSans-Regular, Open Sans" font-size="13">
+            <tspan x="26" y="17">Rejected</tspan>
+        </text>
+        <circle cx="12" cy="12" r="10" fill="#D0021B"/>
+        <path fill="#FFF" fill-rule="nonzero" d="M15.333 14.667L12.667 12V9.88A2.007 2.007 0 0 0 14 8c0-1.107-.893-2-2-2s-2 .893-2 2c0 .867.56 1.6 1.333 1.88V12l-2.666 2.667H6V18h3.333v-2.033l2.667-2.8 2.667 2.8V18H18v-3.333h-2.667z"/>
+    </g>
+</svg>

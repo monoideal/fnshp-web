@@ -1,0 +1,1 @@
+This repository includes the primary web frontend for FNSHP, an e-book recommendations and reading platform for independent publishers and authors. Project of Prescient Innovations.

@@ -1,0 +1,18 @@
+/* for things that must be scoped higher up than material ui components */
+/* like body { margin: 0; } */
+
+* {
+  font-family: Rubik;
+}
+
+body {
+  margin: 0;
+}
+
+.glyphicon-plus:after {
+  content: '+ New Section';
+}
+
+.glyphicon-remove:after {
+  content: '- Delete';
+}
